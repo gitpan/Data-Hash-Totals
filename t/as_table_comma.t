@@ -8,18 +8,18 @@ BEGIN {
 }
 
 my %fave_stooge_votes = (
-    Moe => 310,
+    Moe => 3104,
     Larry => 123456789,
     Curly => 97,
     Shemp => 3,
 );
 
-my @lines = as_table( \%fave_stooge_votes );
+my @lines = as_table( \%fave_stooge_votes, comma=>1 );
 my @expected = <DATA>;
 is_deeply( \@lines, \@expected );
 
 __DATA__
-123456789 Larry
-      310 Moe
-       97 Curly
-        3 Shemp
+123,456,789 Larry
+      3,104 Moe
+         97 Curly
+          3 Shemp
