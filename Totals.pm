@@ -9,11 +9,11 @@ Data::Hash::Totals - Handle hashes that are totals or counts
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 =head1 SYNOPSIS
 
@@ -37,12 +37,14 @@ prints the following:
 
 =cut
 
-use Exporter 'import';
+use Exporter;
+our @ISA = qw( Exporter );
+our @EXPORT = qw( as_table );
 our @EXPORT_OK = qw( as_table );
 
 =head1 EXPORTS
 
-So far, only the C<as_table>, and you have to explicitly ask for it.
+Exports C<as_table>.
 
 =head1 FUNCTIONS
 
@@ -57,7 +59,10 @@ sub as_table {
 
     my @lines;
 
-    my @keys = sort { $hash->{$b} <=> $hash->{$a} } keys %$hash;
+    my @keys = sort {
+        $hash->{$b} <=> $hash->{$a} # Values descending
+            or $a <=> $b            # Keys ascending
+    } keys %$hash;
 
     for my $key ( @keys ) {
         push( @lines, sprintf( "%4d %s\n", $hash->{$key}, $key ) );
