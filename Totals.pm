@@ -9,11 +9,11 @@ Data::Hash::Totals - Handle hashes that are totals or counts
 
 =head1 VERSION
 
-Version 0.02
+Version 0.04
 
 =cut
 
-our $VERSION = '0.02';
+our $VERSION = '0.04';
 
 =head1 SYNOPSIS
 
@@ -61,7 +61,7 @@ sub as_table {
 
     my @keys = sort {
         $hash->{$b} <=> $hash->{$a} # Values descending
-            or $a <=> $b            # Keys ascending
+            or $a cmp $b            # Keys ascending
     } keys %$hash;
 
     for my $key ( @keys ) {

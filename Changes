@@ -1,5 +1,9 @@
 Revision history for Data-Hash-Totals
 
+0.04	
+	[FIXES]
+	* Sorting of values is now using C<cmp> instead of C<< <=> >>
+
 0.02    Fri Oct 29 10:53:46 CDT 2004
         [ENHANCEMENTS]
         * Now exports as_table by default.
